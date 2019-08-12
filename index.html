@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>portf</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family:'Courier New', Courier, monospace;
+        }
+        
+        a{
+            text-decoration: underline;
+        }
+
+        div.menu > a{
+            text-decoration: none;
+        }
+
+        .menu{
+            display: flex;
+            justify-content: space-around;
+            /* width:auto; */
+            width: 40%;
+            margin: auto;
+            padding: 5px;
+            border: 2px solid black;
+            border-top: 0px;
+        }
+
+        .Main{
+            width: 40%;
+            margin: auto;
+            /* border: 2px solid black;
+            border-bottom: 0px; */
+        }
+        .header{
+            font-size: 25px;
+        }
+        .desc{
+            margin-left: 40px;
+            text-align:left;
+        }
+        li{
+            list-style-type: square;
+            margin-bottom: 4px;
+        }
+/*      
+        #info{
+            margin-left: 20px;
+        } */
+        a:hover{
+            background-color: black;
+            color: white !important;
+        }
+        a:visited{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="">Main</a> |
+        <a href="">Blog</a> |
+        <a href="">Resume</a>
+    </div><br><br><br>
+    <div class="Main">
+        <div id="info">
+            <!-- 👋 -->
+            <p style="font-size: 37px;">Hi, my name is <b>John Doe</b></p><br><br>
+            <!-- <span style="font-size: 35px;">John Doe</span> -->
+            <b class="header">ABOUT ME </b>
+            <p class="desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero voluptates exercitationem, impedit quaerat magni nihil accusantium molestias vitae illum consequatur dolorum voluptatum hic distinctio ea, deserunt aliquam labore tempore. Cumque!</p>
+            <br>
+            <b class="header">PROJECTS</a></b>
+            <p class="desc">Here are some projects I coded (links to <a href="">github</a> repos)</p>
+            <ul class="desc">
+                <li><a href="">NameOfTheProject</a> [languages]</li>
+                <li><a href="">NameOfTheProject</a> [languages]</li>
+                <li><a href="">NameOfTheProject</a> [languages]</li>
+            </ul>
+        </div>
+    </div>
+    
+</body>
+</html>
