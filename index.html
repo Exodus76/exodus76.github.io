@@ -3,87 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>portf</title>
-    <style>
-        body{
-            margin: 0;
-            padding: 0;
-            font-family:'Courier New', Courier, monospace;
-        }
-        
-        a{
-            text-decoration: underline;
-        }
-
-        div.menu > a{
-            text-decoration: none;
-        }
-
-        .menu{
-            display: flex;
-            justify-content: space-around;
-            /* width:auto; */
-            width: 40%;
-            margin: auto;
-            padding: 5px;
-            border: 2px solid black;
-            border-top: 0px;
-        }
-
-        .Main{
-            width: 40%;
-            margin: auto;
-            /* border: 2px solid black;
-            border-bottom: 0px; */
-        }
-        .header{
-            font-size: 25px;
-        }
-        .desc{
-            margin-left: 40px;
-            text-align:left;
-        }
-        li{
-            list-style-type: square;
-            margin-bottom: 4px;
-        }
-/*      
-        #info{
-            margin-left: 20px;
-        } */
-        a:hover{
-            background-color: black;
-            color: white !important;
-        }
-        a:visited{
-            color: black;
-        }
-    </style>
+    <title>bruh</title>
 </head>
 <body>
-    <div class="menu">
-        <a href="">Main</a> |
-        <a href="">Blog</a> |
-        <a href="">Resume</a>
-    </div><br><br><br>
-    <div class="Main">
-        <div id="info">
-            <!-- 👋 -->
-            <p style="font-size: 37px;">Hi, my name is <b>John Doe</b></p><br><br>
-            <!-- <span style="font-size: 35px;">John Doe</span> -->
-            <b class="header">ABOUT ME </b>
-            <p class="desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero voluptates exercitationem, impedit quaerat magni nihil accusantium molestias vitae illum consequatur dolorum voluptatum hic distinctio ea, deserunt aliquam labore tempore. Cumque!</p>
-            <br>
-            <b class="header">PROJECTS</a></b>
-            <p class="desc">Here are some projects I coded (links to <a href="">github</a> repos)</p>
-            <ul class="desc">
-                <li><a href="https://github.com/Exodus76/parse-torrent-name">Torrent name parser</a> [c++]</li>
-                <li><a href="">Advent of Code 2019 solutions</a> [python]</li>
-                <li><a href="">NameOfTheProject</a> [languages]</li>
-            </ul>
-        </div>
-    </div>
-    
+    <input type="range" min="0" max="500" value="0" style="transform: rotate(-90deg); margin-top: 100px;" id="slider" disabled="true">
+<script>
+var mainSlider = document.getElementById("slider");
+var count = 0;
+
+window.onload = function start()
+{
+	navigator.mediaDevices.getUserMedia({audio: true})
+		.then(function (stream)
+		{
+			audioContext = new AudioContext();
+			analyser = audioContext.createAnalyser();
+			microphone = audioContext.createMediaStreamSource(stream);
+
+			javascriptNode = audioContext.createScriptProcessor(1024, 1, 1);
+
+			analyser.smoothingTimeConstant = 0.8;
+			analyser.fftSize = 1024;
+
+			microphone.connect(analyser);
+			analyser.connect(javascriptNode);
+			javascriptNode.connect(audioContext.destination);
+
+			setInterval(function ()
+			{
+				if (!document.hasFocus())
+				{
+					audioContext.suspend();
+				}
+				else
+				{
+					audioContext.resume();
+				}
+			}, 1000)
+
+			javascriptNode.onaudioprocess = async function ()
+			{
+
+				var array = new Uint8Array(analyser.frequencyBinCount);
+				analyser.getByteFrequencyData(array);
+				var values = 0;
+
+				var length = array.length;
+				for (var i = 0; i < length; i++)
+				{
+					values += (array[i]);
+				}
+
+				var average = values / length;
+
+				var newAverage = Math.round(average);
+
+				if (newAverage > 20)
+				{
+					mainSlider.value = count++;
+				}
+
+				if (mainSlider.value == 100 && tracker == 0)
+				{
+					if (confirm("do you want to open 4chan"))
+					{
+						window.open("https://www.4chan.org");
+					}
+					tracker++;
+				}
+				else if (mainSlider.value == 200 && tracker == 1)
+				{
+					if (confirm("do you want to open duckduckgo"))
+					{
+						window.open("https://www.duckduckgo.com");
+					}
+					tracker++;
+				}
+				else if (mainSlider.value == 300 && tracker == 2)
+				{
+					if (confirm("do you want to open nyaa"))
+					{
+						window.open("https://www.nyaa.si");
+					}
+					tracker++;
+				}
+				else if (mainSlider.value == 400 && tracker == 3)
+				{
+					if (confirm("do you want to open anilist"))
+					{
+						window.open("https://www.anilist.co");
+					}
+					tracker++;
+				}
+				else if (mainSlider.value == 500 && tracker == 4)
+				{
+					if (confirm("do you want to open duckduckgo"))
+					{
+						window.open("https://youtu.be/dQw4w9WgXcQ");
+					}
+					mainSlider.value = 0;
+					count = 0;
+					tracker = 0
+				}
+				// console.log(mainSlider.value);n 
+			}
+			if (document.hasFocus())
+			{
+				audioContext.resume();
+			}
+		})
+		.catch(function (err)
+		{
+			/* handle the error */
+            //no error to handle im2pro
+		});
+};
+var tracker = 0;
+    </script>
 </body>
 </html>
